@@ -9,6 +9,14 @@ In this guide, we will walk you through the process of debugging a simple React 
 
 Before we begin, make sure you have Node.js and npm (Node Package Manager) installed on your machine. If you don't have them installed, please follow the official documentation for your operating system to install them.
 
+## Clone this Project
+If you prefer using a graphical user interface (GUI) like GitHub Desktop, you can clone this repo using that application. Follow the application's instructions for cloning a repository. If you prefer the command line or don't have a GUI, you can follow the instructions below:
+
+
+1. Open your command line or terminal
+2. Clone the broken-react-state repository to your local computer by running the following command:
+     `git clone [url_of_the_repository]`
+
 ## Installation
 1. Open your command line or terminal.
 2. Navigate to the root directory of the broken-state project.
