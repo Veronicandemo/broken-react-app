@@ -1,42 +1,55 @@
-import React, { useState } from "react";
-import "./App.css";
+import React, { useState } from 'react'
+import './App.css'
 
 const App = () => {
-  const [background, setBackground] = useState("white");
-  const [counter, setCounter] = useState(0);
-  const [inputValue, setInputValue] = useState("");
-  const [showModal, setShowModal] = useState(false);
-  const [error, setError] = useState(null);
-
+  const [background, setBackground] = useState(true)
+  const [counter, setCounter] = useState(0)
+  const [inputValue, setInputValue] = useState('')
+  const [showModal, setShowModal] = useState(false)
+  const [showMessage, setShowMessage] = useState(false)
+  const [error, setError] = useState(null)
   const toggleBackground = () => {
-    setBackground("lightgray");
-  };
+    setBackground((prev) => !prev)
+  }
 
   const incrementCounter = () => {
-    setCounter((prevCounter) => prevCounter + 2);
-  };
+    setCounter((prevCounter) => prevCounter + 2)
+  }
 
   const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
+    setInputValue(event.target.value)
+    if (inputValue.trim() === '') {
+      setShowMessage(true)
+    } else {
+      setShowMessage(false)
+    }
+  }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    if (inputValue.trim() !== "") {
-      console.log("Submitted:", inputValue);
-      setShowModal(true);
-      setError(null);
+    event.preventDefault()
+    if (inputValue.trim() !== '') {
+      console.log('Submitted:', inputValue)
+      setShowMessage(false)
+
+      setShowModal(true)
+      setError(null)
+      setInputValue('')
     } else {
-      console.log("Setting error message"); 
-      setError("Please enter something before submitting!");
+      setShowMessage(true)
+      console.log('Setting error message')
+      setError('Please enter something before submitting!')
     }
-  };
-  
+  }
+
   const closeModal = () => {
-  };
+    setShowModal(false)
+  }
 
   return (
-    <div className="container" style={{ background }}>
+    <div
+      className="container"
+      style={{ background: background ? 'white' : 'lightgrey' }}
+    >
       <h1 className="title">React App</h1>
 
       <button className="toggle-btn" onClick={toggleBackground}>
@@ -44,7 +57,7 @@ const App = () => {
       </button>
 
       <p className="counter">Counter: {counter}</p>
-      <button className="increment-btn">
+      <button className="increment-btn" onClick={incrementCounter}>
         Increment Counter
       </button>
 
@@ -56,15 +69,11 @@ const App = () => {
           onChange={handleInputChange}
           placeholder="Enter something"
         />
-        <button
-          className="submit-btn"
-          type="submit"
-        >
+        <button className="submit-btn" type="submit">
           Submit
         </button>
       </form>
-
-      <p className="error-message">Please enter something before submitting!</p>
+      {showMessage && <p className="error-message">{error}</p>}
 
       {showModal && (
         <div className="modal">
@@ -77,7 +86,7 @@ const App = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
